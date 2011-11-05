@@ -1,0 +1,5 @@
+_site/*
+css/*
+.project
+.sass-cache
+_flickr.yml

@@ -1,0 +1,16 @@
+---
+layout: base
+---
+
+{% assign post = page %}
+{% assign single_post = true %}
+
+<div class="asidebar">
+  {% include box_meta.html %}
+  {% include box_related.html %}
+  {% include box_categories.html %}
+  {% include box_tag_cloud.html %}
+  {% include box_archives.html %}
+</div>
+
+{% include post.html %}

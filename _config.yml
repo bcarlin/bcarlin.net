@@ -1,0 +1,17 @@
+pygments: true
+pygments_style: default
+paginate: 10
+permalink: /blog/:year/:month/:title.html
+category_dir: /blog/category
+tag_dir: /blog/tag
+feed_category_dir: /blog/feeds/category
+feed_tag_dir: /blog/feeds/tag
+archive_dir: /blog
+lsi: true
+
+exclude: 
+  - Gemfile
+  - Gemfile.lock
+  - Rakefile
+  - config.rb
+

@@ -1,0 +1,27 @@
+---
+layout: base
+---
+{% if page.title %}
+  {% capture title %}
+    Blog - {{page.title}}
+  {% endcapture %}
+{% else %}
+  {% assign title = "Blog" %}
+{% endif %}
+
+<div class="asidebar">
+  {% include box_categories.html %}
+  {% include box_tag_cloud.html %}
+  {% include box_archives.html %}
+</div>
+
+<section class="main-content" id="intro">
+  <header><h1>{{ title }}</h1></header>
+  {{ content }}
+</section>
+
+{% for post in paginator.posts limit:paginator.per_page offset:0 %}
+  {% include post.html %}
+{% endfor %}
+
+{% include pagination.html %}

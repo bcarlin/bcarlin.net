@@ -1,0 +1,153 @@
+@import "compass/css3/box-sizing";
+@import "compass/css3/transition";
+@import "compass/css3/text-shadow";
+
+.sidebar {
+  @include single-text-shadow($light-gray, 1px, 1px, 1px);
+  section {
+    background: {
+      color: $sidebar-bg;
+      image: url('/images/top.png'), url('/images/bottom.png');
+      position: center top, center bottom;
+      repeat: no-repeat;
+    }
+    color: white;
+    padding: 20px 5px;
+    
+    
+    .profile {
+      display: block;
+      margin: 10px auto;
+    }
+    
+    h1 {
+      color: inherit;
+      text-align: center;
+      //margin-bottom: 10px;
+    }
+    
+    h2 {
+      color: inherit;
+      font-size: 1.1em;
+    }
+    
+    li {
+      margin-left: 10px;
+      margin-top: 5px;
+    }
+    
+    a {
+      color: inherit;
+      
+      &:hover {
+        //background-color: $light-blue;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      
+      img {
+        vertical-align: middle;
+      }
+    }
+    
+    p {
+      text: {
+        align: left;
+        indent: 0;
+      }
+      font-size: 1em;
+    }
+  }
+  
+  .flickr {
+    text-align: center;
+    
+    a {
+      position: relative;
+      margin-left: auto;
+      margin-right: auto;
+      display: inline-block;
+      //height: 100px;
+      //width: 100px;
+      overflow: hidden;
+    }
+    
+    img {
+      margin: 0; 
+    }
+    
+    span {
+      @include box-sizing(border-box);
+      @include transition-property(bottom);
+      @include transition-duration(0.5s);
+      @include transition-timing-function(ease-out);
+      
+      background-color: transparentize(lighten($cream, 10%), .15);
+      bottom: -50px;
+      left: 0px;
+      position: relative;
+      width: 100%;
+      float: left;
+      position: absolute;
+      text-align: center;
+      padding: 5px;
+      color: $dark-gray;
+      font-weight: bold;
+    }
+    
+    &:hover span {
+      bottom: 0px;
+    }
+  }
+}
+
+.about-me {
+
+  em {
+    font: {
+      variant: normal;
+      weight: bold;
+      size: 1.05em;
+    }
+    color: $cream;
+  }
+   
+
+  li a {
+    padding-left: 20px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    line-height: 1.8em;
+    
+    &[data-service="linkedin"] {
+      background-image: url(/images/linkedin.png);
+    }
+    
+    &[data-service="email"] {
+      background-image: url(/images/email.png);
+    }
+    
+    &[data-service="twitter"] {
+      background-image: url(/images/twitter.png);
+    }
+    
+    &[data-service="flickr"] {
+      background-image: url(/images/flickr.png);
+    }
+    
+    &[data-service="delicious"] {
+      background-image: url(/images/delicious.png);
+    }
+    
+    &[data-service="bitbucket"] {
+      background-image: url(/images/bitbucket.png);
+    }
+  }
+}
+
+
+.asidebar {
+  h1 {
+    text-align: center;
+  }
+}

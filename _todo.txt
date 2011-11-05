@@ -1,0 +1,17 @@
+* integration feedburner
+* sécurisation
+* déploiement
+
+-------------------------------------------------------------------------------
+
+* twitter integration
+* rake task to add article
+* make scss conversion a part of Jekyll
+* metadata
+	* open graph integration
+	* dc integration
+	* openid delegation
+* sitemap generator
+* credits page
+* make a sprite with icons
+

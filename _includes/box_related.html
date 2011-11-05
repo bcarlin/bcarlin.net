@@ -1,0 +1,10 @@
+<aside>
+  <header><h1>Related Posts</h1></header>
+  {% if site.related_posts %}
+    <ul>
+    {% for post in site.related_posts %}
+      <li>{% include post_line.html %}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+</aside>

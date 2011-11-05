@@ -1,0 +1,32 @@
+<link rel="alternate" 
+      type="text/rss+xml" 
+      title="Bruno Carlin's Blog (RSS)"
+      href="http://feeds.feedburner.com/aerdhyl/all" />
+
+<link rel="alternate" 
+      type="text/atom+xml" 
+      title="Bruno Carlin's Blog (Atom)"
+      href="http://feeds.feedburner.com/aerdhyl/atom" />
+      
+{% if page.url contains '/blog/category/' %}
+  <link rel="alternate" 
+        type="text/rss+xml" 
+        title="Bruno Carlin's Blog - {{page.title}} (RSS)"
+        href="http://aerdhyl.eu/blog/feeds/category/{{page.set}}.rss.xml" />
+
+  <link rel="alternate" 
+        type="text/atom+xml" 
+        title="Bruno Carlin's Blog - {{page.title}} (Atom)"
+        href="http://aerdhyl.eu/blog/feeds/category/{{page.set}}.atom.xml" />
+{% endif %}
+{% if page.url contains '/blog/tag/' %}
+  <link rel="alternate" 
+        type="text/rss+xml" 
+        title="Bruno Carlin's Blog - {{page.title}} (RSS)"
+        href="http://aerdhyl.eu/blog/feeds/tag/{{page.set}}.rss.xml" />
+
+  <link rel="alternate" 
+        type="text/atom+xml" 
+        title="Bruno Carlin's Blog - {{page.title}} (Atom)"
+        href="http://aerdhyl.eu/blog/feeds/tag/{{page.set}}.atom.xml" />
+{% endif %}

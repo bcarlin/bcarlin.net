@@ -1,33 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8">
     <title>Bruno Carlin - {{ page.title }}</title>
-    <link rel="stylesheet" href="/css/aerdhyl.css" />
+    {% include syndication.html %}
+    {% include style.html %} 
+    {% include top-javascript.html %}
   </head>
   <body>
-      <header>
-          <div id="title">Bruno Carlin</div>
-          <nav>
-              <ul>
-                  <li><a href="/">Home</a></li>
-                  <li><a href="/blog.html">Blog</a></li>
-                  <li><a href="/about.html"></a></li>
-              </ul>
-          </nav>
-      </header>
-      <div id="main" role="main">    
-          <section class="main-content" id="intro">
-              {{ content }}
-          </section>
-          <section class="main-content">
-              <header>Latest Post</header>
-              <article>
-                  <h1><a href='{{site.posts.first.url}}'>
-                      {{site.posts.first.title}}
-                  </a></h1>
-                  {{ site.posts.first.content }}
-              </article>
-          </section>
-      </div>
+    {% include header.html %}
+    
+    <div class="wrapper" role="main"> 
+      <div class="sidebar">
+        {% include box_about.html %}
+        {% include box_flickr.html %}
+      </div>   
+      
+      {{ content }}
+
+    </div>
+    
+    {% include footer.html %}
+    {% include bottom-javascript.html %}
   </body>
 </html>

@@ -1,0 +1,110 @@
+@import "compass/typography/links/hover-link";
+@import "compass/css3/border-radius";
+@import "compass/css3/box-sizing";
+@import "compass/css3/text-shadow";
+
+html {
+  font-size: 12px;
+}
+
+body {
+  @include box-sizing(border-box);
+  line-height: 1.3em;
+  font-size:100%;
+  @include sans-font;
+  background-color: $background;
+  color: $text;
+}
+
+#{elements-of-type(block)} {
+  @include box-sizing(inherit);
+}
+
+
+a {
+  @include hover-link;
+  color: $dark-blue;
+  line-height: 1em;
+  
+  &:hover {
+    color: $light-blue;
+  }
+}
+
+p {
+  text: {
+    align: justify;
+    indent: 20px;
+  }
+  margin-bottom: 10px;
+  
+  //font-size: 0.8em;
+}
+
+tt {
+  @include mono-font;
+  //@include border-radius(5px);
+  font: {
+    family: monospace, courrier new;
+    size: .9em;
+  }
+  //background-color: #EEE;
+  background-color: darken($cream, 0.5%);
+  padding: 1px;
+  //border: lightgray 1px solid;
+  white-space: nowrap;
+}
+
+pre {
+  @include mono-font;
+  font: {
+    size: .8em;
+  }
+  padding: {
+    left: 15px;
+    right: 15px;
+    top: 7px;
+    bottom: 7px;
+  }
+}
+
+h1 {
+  
+  line-height: 1em;
+  @include Qlassik-font;
+  font-weight: bold;
+  font-size: 1.9em;
+  color: $light-gray;
+}
+
+h2 {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.highlight {
+  @include border-radius(5px);
+  border: lightgray 1px solid;
+  background-color: #EEE;
+  margin: {
+    left: 30px;
+    right: 30px;
+    top: 5px;
+    bottom: 15px;
+  }
+}
+
+.right {
+  text-align: right;
+  display: inline-block;
+  width: 100%;
+}
+
+em {
+  font-variant: italic;
+}
+
+strong {
+  font-weight: bold;
+}

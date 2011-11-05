@@ -1,0 +1,18 @@
+@mixin narrow {
+  width: 1000px;
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}
+
+@mixin sidebar {
+  float: right;
+  width: 250px;
+  margin:{
+    left: 25px;
+    bottom: 10px;
+    top: 10px;
+  }
+  border-left: 1px solid gray;
+}

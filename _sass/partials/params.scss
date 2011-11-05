@@ -1,0 +1,16 @@
+$light-blue: #A4CECD;
+$dark-blue: #75B9BA;
+$cream: #EFEBD0;
+$light-gray: #857D7A;
+$dark-gray: #655D5A;
+
+$background: $cream;
+$headings: $light-blue;
+$sidebar-bg: $dark-blue;
+$home-bg: $sidebar-bg;
+$text: $dark-gray;
+
+$site-width: 1000px;
+$maincontent-width: 550px;
+$gutter-width: 40px;
+$sidebar-width: ($site-width - ($maincontent-width + 2 * $gutter-width) ) / 2;

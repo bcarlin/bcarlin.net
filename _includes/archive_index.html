@@ -1,0 +1,20 @@
+---
+layout: blog
+---
+<ul>
+{% for post in site.posts %}
+{% capture month %}{{post.date | date: "%m"}}{% endcapture %}
+{% capture year %}{{post.date | date: "%Y"}}{% endcapture %}
+
+{% if year == page.year %}
+  {% if page.month %} 
+    {% if month == page.month %}
+      <li>{% include post_line.html %}</li>
+     {% endif %}
+  {% else %}
+    <li>{% include post_line.html %}</li>
+  {% endif %}
+
+{% endif %}
+{% endfor %}
+</ul>
