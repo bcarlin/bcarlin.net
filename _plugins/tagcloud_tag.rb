@@ -14,7 +14,7 @@ module Jekyll
         weight = Float(count-min_count)/[max_count-min_count, 1].max
         tag_class = get_class_for weight
         
-        html << "<a class=\"#{tag_class}\" href=\"#{tag_dir}/#{tag}.html\">#{tag.pretty_print}</a>"
+        html << "<a class=\"#{tag_class}\" href=\"#{tag_dir}/#{tag}.html\">#{tag.pretty_print}</a> "
         
       end
     end
