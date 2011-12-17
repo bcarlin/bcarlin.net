@@ -79,6 +79,8 @@ Finally, I put
 -Dorg.eclipse.swt.browser.XULRunnerPath=/usr/lib/xulrunner-1.9.2
 {% endhighlight %}
 
-at the end of the ``AptanaStudio3.ini`` file in the Aptana Studio folder.
+at the end of the ``AptanaStudio3.ini`` file in the Aptana Studio folder. For 
+the package in the Arch Linux repositories, this file is 
+``/usr/share/aptana/AptanaStudio3.ini``.
 
  
