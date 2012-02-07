@@ -1,8 +1,8 @@
 
 
-desc "Remove previous builds artefacts"
+desc "Remove previous builds artifacts"
 task :clean do
-  sh "rm -r _site/*"
+  sh "rm -r _site/*" unless Dir["_site/*"].empty?
 end
 
 namespace :build do

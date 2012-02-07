@@ -3,8 +3,8 @@ module Jekyll
     safe true
 
     priority :low
-    pygments_prefix ".. \n"
-    pygments_suffix "\n"
+    pygments_prefix ".. START\n"
+    pygments_suffix "    END"
     
     def setup
       return if @setup
@@ -27,18 +27,17 @@ module Jekyll
     end
     
     def cleanup(txt)
-      
       txt = txt[/<div class="document">(.*)<\/div>/m, 1]
       cleanups = {/<span class="pre">(.*?)<\/span>/m => '\1',
                   /\ class="docutils literal"/ => "",
                   /\ class="literal-block"/ => "",
-                  /<!--\ (<div\ class="highlight">.*?<\/div>) -->/m => '\1'}
+                  /<!-- START.*?(<div\ class="highlight">.*?<\/div>).*?END -->/m => '\1'}
       cleanups.each {|rx, repl| txt.gsub! rx, repl }
       txt
     end
     
     def prepare(content)
-      content.gsub!(/\.\.\ *?\n.*?<pre>(.*?)<\/div>\n{2}/m){|match|
+      content.gsub!(/\.\. START.*?<div class="highlight">(.*?)<\/div>.*?END/m){|match|
         match.gsub! "\n", "\n    "
       }
       content
