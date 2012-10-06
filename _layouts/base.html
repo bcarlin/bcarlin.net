@@ -7,16 +7,20 @@
     {% include style.html %} 
     {% include top-javascript.html %}
   </head>
-  <body>
+  <body class="container">
+
     {% include header.html %}
     
-    <div class="wrapper" role="main"> 
-      <div class="sidebar">
+    <div class="row">
+      
+      <div class="sidebar span1">
         {% include box_about.html %}
-        {% include box_flickr.html %}
+        <!--{% include box_flickr.html %}-->
       </div>   
       
-      {{ content }}
+      <div class="span3 last">
+        {{ content }}
+      </div>
 
     </div>
     

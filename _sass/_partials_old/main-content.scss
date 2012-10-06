@@ -1,5 +1,4 @@
 @import "compass/css3/border-radius";
-@import "compass/utilities/general/clearfix";
 @import "compass/css3/text-shadow";
 
 .main-content {
@@ -14,15 +13,11 @@
   
   dt {
     font-weight: bold;
-    margin-top: 15px;
+    margin-top: 1.1em;
   }
   
   dd {
     padding-left: 25px;
-  }
-  
-  p {
-    line-height: 1.7em;
   }
 }
 
@@ -51,18 +46,4 @@ article h1 {
   }
 }
 
-nav {
-  @include clearfix;
-  .prev {
-    float: left;
-    &:before {
-      content: "<  ";
-    }
-  }
-  .next {
-    float: right;
-    &:after {
-      content: "  >";
-    }
-  }
-}
+

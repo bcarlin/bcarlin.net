@@ -1,0 +1,11 @@
+@import "compass/utilities/general/tag-cloud";
+
+.tagcloud {
+  @include tag-cloud(1.2em);
+  text-align: center;
+  
+  a {
+    margin: 2px 5px;
+    white-space: nowrap;
+  }
+}

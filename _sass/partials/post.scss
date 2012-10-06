@@ -1,4 +1,4 @@
-@import "compass/utilities/general/tag-cloud";
+@import "compass/utilities/general/clearfix";
 
 article {
   header {
@@ -6,57 +6,56 @@ article {
       bottom: 30px;
       top: 5px;
     }
+    
+    h1 {
+      border-bottom: gray 1px solid;
+      padding-bottom: 10px;
+      margin-bottom: 0;
+      
+      a:hover {
+        decoration: none;
+      }
+    }
   }
   h1 {
     line-height: 1em;
   }
-  time {
-    display: block;
-    color: $light-gray;
+  aside {
     font-size: 0.8em;
-    margin-bottom: 5px;
   }
 }
 
-.tagcloud {
-  @include tag-cloud(1.2em);
-  text-align: center;
+header h1 {
+  margin-top: 10px;
+}
+
+time {
+  color: $light-gray;
+}
+
+a[rel=tag]:before  {  
+  //content: url('/images/tag-lg-11.png');
+  vertical-align: bottom;
+  padding-right: 5px;
+}
+
+nav.prevNext {
+  @include clearfix;
+  border-bottom: gray 1px solid;
+  border-top: gray 1px solid;
+  margin-top: 2em;
+  margin-bottom: 2em;
   
-  a {
-    margin: 2px 5px;
-    white-space: nowrap;
+  .prev {
+    float: left;
+    &:before {
+      content: "<  ";
+    }
   }
-}
-
-aside {
-  dt {
-    font-weight: bold;
-  }
-  dd {
-    padding-left: 5px;
-    margin-bottom: 5px
-  }
-}
-
-.archives {
-  li li {
-    margin-left: 15px; 
-  }
-}
-
-a[rel=tag] {
-  @include border-radius(5px);
-  font: {
-    family: monospace, courrier new;
-    size: .8em;
-  }
-  background-color: #EEE;
-  padding: 1px;
-  border: lightgray 1px solid;
-  
-  &:before {
-    content: url('/images/tag-lg-11.png');
-    vertical-align: bottom;
-    padding-right: 5px;
+  .next {
+    float: right;
+    &:after {
+      content: "  >";
+    }
   }
 }

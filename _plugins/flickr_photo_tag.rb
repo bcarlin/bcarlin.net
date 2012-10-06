@@ -69,4 +69,4 @@ module Jekyll
   end
 end
 
-Liquid::Template.register_tag('flickr_photo', Jekyll::FlickrPhoto)
+#Liquid::Template.register_tag('flickr_photo', Jekyll::FlickrPhoto)

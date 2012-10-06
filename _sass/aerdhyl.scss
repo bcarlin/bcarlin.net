@@ -1,13 +1,13 @@
-@import "partials/params";
+@import url(http://fonts.googleapis.com/css?family=Cagliostro);
+
 @import "compass/reset";
-//@import "partials/mixins";
+@import "partials/params";
+@import "partials/grid";
 @import "partials/fonts";
-@import "partials/layout";
-@import "partials/base-elements";
-@import "partials/home-page";
+@import "partials/typo";
+
 @import "partials/header";
 @import "partials/sidebars";
-@import "partials/main-content";
 @import "partials/post";
 @import "partials/footer";
-@import "partials/disqus_override";
+@import "partials/tagcloud";

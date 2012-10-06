@@ -9,19 +9,14 @@ layout: base
   {% assign title = "Blog" %}
 {% endif %}
 
-<div class="asidebar">
-  {% include box_categories.html %}
-  {% include box_tag_cloud.html %}
-  {% include box_archives.html %}
-</div>
-
-<section class="main-content" id="intro">
+<section>
   <header><h1>{{ title }}</h1></header>
   {{ content }}
-</section>
 
-{% for post in paginator.posts limit:paginator.per_page offset:0 %}
-  {% include post.html %}
+<ul>
+{% for post in paginator.posts %}
+  <li>{% include post_line.html %}</li>
 {% endfor %}
+</ul>
 
-{% include pagination.html %}
+</section>

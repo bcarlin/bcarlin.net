@@ -1,16 +1,26 @@
-$light-blue: #A4CECD;
-$dark-blue: #75B9BA;
+$light-blue: #08C;
+$dark-blue: #005580;
 $cream: #EFEBD0;
 $light-gray: #857D7A;
 $dark-gray: #655D5A;
 
-$background: $cream;
-$headings: $light-blue;
+$background-color: white;
+$headings-color: $dark-gray;
 $sidebar-bg: $dark-blue;
 $home-bg: $sidebar-bg;
-$text: $dark-gray;
+$text-color: black;
+$link-color: $light-blue;
+$link-hover-color: $dark-blue;
 
-$site-width: 1000px;
-$maincontent-width: 550px;
-$gutter-width: 40px;
-$sidebar-width: ($site-width - ($maincontent-width + 2 * $gutter-width) ) / 2;
+$base-font-size: 13px;
+$headings-font: Cagliostro, sans;
+
+$grid-numCol: 4;
+$grid-width: 800px;
+$grid-align: "left";
+$grid-gutter: 5%;
+
+//$site-width: 1000px;
+//$maincontent-width: 550px;
+//$gutter-width: 40px;
+//$sidebar-width: ($site-width - ($maincontent-width + 2 * $gutter-width) ) / 2;

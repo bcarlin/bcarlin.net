@@ -23,7 +23,7 @@ module Jekyll
       classes = %w{ xxs xs s l xl xxl }
       
       return classes[-1] if weight == 1.0
-      classes.at (weight/(1.0/classes.count)).to_i
+      classes.at ( weight / (1.0 / classes.count) ).to_i
     end
   end
 end

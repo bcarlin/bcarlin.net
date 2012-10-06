@@ -1,9 +1,6 @@
 @import "compass/css3/border-radius";
 
-body > footer {
-  @include border-top-left-radius(10px);
-  @include border-top-right-radius(10px);
-  background-color: lighten($cream, 4%);
+body > footer.row {
   color: $light-gray;
   padding: 10px;
   text-align: center;

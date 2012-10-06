@@ -2,13 +2,17 @@
 layout: base
 ---
 
-<section class="main-content" id="intro">
+<section>
   <header><h1>{{ page.title }}</h1></header>
   {{ content }}
 </section>
 
-<section class="main-content">
-  <header><h1>Latest Post</h1></header>
-  {% assign post = site.posts.first %}
-  {% include post.html %}
+
+<section>
+  <header><h1>Latest posts</h1></header>
+  <ul>
+  {% for post in site.posts limit:10 %}
+    <li>{% include post_line.html %}</li>
+  {% endfor %}
+</ul>
 </section>

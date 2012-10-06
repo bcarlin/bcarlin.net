@@ -1,79 +1,18 @@
-//@import "compass/typography/lists/horizontal-list";
-@import "compass/css3/text-shadow";
 
-header nav {
-  float: right;
-  margin: {
-    top: 15px;
-    right: 230px;
-  }
-  
-  li {
-    @include Qlassik-font;
-    float: left;
-    margin-right: 50px;
-    font-size: 1.8em;
-    
-    &:hover a {
-      color: $dark-gray; 
-    }
-    
-    a {
-      padding-left: 30px;
-      color: $light-gray;
-      &:hover {
-        text-decoration: none;
-      }
-      line-height: 1.3em;
-      
-      background-repeat: no-repeat;
-      
-      &[title="Home Page"] {
-        background-image: url(/images/home-lg-20.png);
-        &:hover {
-          background-image: url(/images/home-dg-20.png);
-        }
-      }
-      
-      &[title="My Blog"] {
-        background-image: url(/images/blog-lg-20.png);
-        &:hover {
-          background-image: url(/images/blog-dg-20.png);
-        }
-      }
-      
-      &[title="About Me"] {
-        background-image: url(/images/about-lg-20.png);
-        &:hover {
-          background-image: url(/images/about-dg-20.png);
-        }
-      }
-    }
-  }
-}
+
 
 #title {
-  @include Qlassik-font;
-  @include single-text-shadow($light-gray, 1px, 1px, 1px);
+  @include Cagliostro-font;
+
   font: {
-    size: 2.8em;
+    size: 2.5em;
     weight: bold;
   }
   line-height: 1em;
-  text-align: center;
-  color: white;
   
-  width: $sidebar-width;
   padding: {
     top: 10px;
     bottom: 20px;
-  }
-  
-  background: {
-    color: $sidebar-bg;
-    image: url('/images/bottom.png');
-    repeat: no-repeat;
-    position: bottom left;
   }
   
   a {
@@ -83,7 +22,3 @@ header nav {
     }
   }
 }
-
-/*nav {
-  @include horizontal-list;
-}*/

@@ -29,7 +29,7 @@ end
 
 desc "Send the website live"
 task :deploy => ["build:prod"] do
-  sh "rsync -vzr _site/ aerdhyl@aerdhyl.eu:/home/aerdhyl/aerdhyl.eu"
+  sh "rsync -vzr _site/ bcarlin.net:/home/bcarlin/bcarlin.net"
 end
 
 
