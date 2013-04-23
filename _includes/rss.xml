@@ -1,6 +1,0 @@
----
-layout: rss
----
-{% for post in site[page.post_list][page.set] limit:20 %}
-  {% include rss_post.xml %}
-{% endfor %}

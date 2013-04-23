@@ -1,0 +1,13 @@
+{% extends "post.tmpl" %}
+{% block content %}
+<section>
+    <header>
+    {% if title %}
+        <h1>{{title}}</h1>
+    {% endif %}
+    </header>
+
+    {{post.text()}}
+
+</section>
+{% endblock %}

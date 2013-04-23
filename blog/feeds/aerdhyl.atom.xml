@@ -1,6 +1,0 @@
----
-layout: atom
----
-{% for post in site.posts limit:20 %}
-  {% include atom_post.xml %}
-{% endfor %}

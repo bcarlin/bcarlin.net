@@ -1,0 +1,27 @@
+{% extends "base.tmpl" %}
+{% block content %}
+<section>
+    {#<header>
+        <h1>{{title}}</h1>
+    </header>#}
+    <ul>
+    {% for post in posts %}
+        <li>
+            <a href="{{post.permalink()}}">{{post.title()}}</a>
+            (<time datetime="{{post.formatted_date("%Y-%m-%d")}}">{{post.formatted_date("%d %b %Y")}}</time>)
+        </li>
+    {% endfor %}
+    </ul>
+
+    <ul class="pager">
+      {%if prevlink %}
+        <li class="previous">
+            <a href="{{prevlink}}">&larr; {{messages("Newer posts")}}</a>
+      {% endif %}
+      {% if nextlink %}
+        <li class="next">
+            <a href="{{nextlink}}">{{messages("Older posts")}}  &rarr;</a>
+      {% endif %}
+    </ul>
+</section>
+{% endblock %}

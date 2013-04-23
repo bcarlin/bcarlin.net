@@ -1,0 +1,5 @@
+* metadata
+	* open graph integration
+	* dc integration
+	* openid delegation
+* credits page

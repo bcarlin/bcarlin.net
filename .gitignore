@@ -1,5 +1,4 @@
-_site/*
-css/aerdhyl.css
-.project
-.sass-cache
-_flickr.yml
+.doit.db
+__pycache__/
+cache/
+output/

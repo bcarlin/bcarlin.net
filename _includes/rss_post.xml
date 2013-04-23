@@ -1,8 +1,0 @@
-<item>
-  <title>{{ post.title }}</title>
-  <link>http://aerdhyl.eu{{ post.url }}</link>
-  <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
-  <author>self@aerdhyl.eu (Bruno Carlin)</author>
-  <guid>http://aerdhyl.eu{{ post.id }}</guid>
-  <description>{{ post.content | xml_escape }}</description>
-</item>
