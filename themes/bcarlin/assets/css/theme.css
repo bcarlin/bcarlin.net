@@ -127,6 +127,13 @@ tt {
     white-space: nowrap;
 }
 
+a[rel='license'] img {
+    height: 15px;
+    width: 15px;
+    margin-left: 5px;
+    vertical-align: text-top;
+}
+
 /** HEADER **/
 
 #blog-title {
