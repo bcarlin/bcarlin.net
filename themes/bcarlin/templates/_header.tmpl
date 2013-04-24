@@ -1,6 +1,15 @@
-<div class="span12" id="titlecolumn">
-  <h1 id="blog-title">
-      <a href="{{abs_link('/')}}" title="{{blog_title}}">{{blog_title}}</a>
-  </h1>
-  {% block belowtitle%}{% endblock %}
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <img src="/assets/img/profile.png" class="profile" alt="Bruno Carlin" />
+      <a class="brand" href="{{abs_link('/')}}" title="{{blog_title}}">
+        {{blog_title}}
+      </a>
+      <ul class="nav">
+        {% for url, text in sidebar_links[lang] %}
+        <li><a href="{{url}}">{{text}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
 </div>

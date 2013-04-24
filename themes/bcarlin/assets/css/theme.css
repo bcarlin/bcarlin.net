@@ -3,9 +3,14 @@
  * ORIGINAL CSS
  */
 
-#container {
-    width: 800px;
+.navbar .container {
+    max-width: 800px;
 }
+
+.container {
+    max-width: 600px;
+}
+
 
 #q {
     width: 150px;
@@ -65,21 +70,22 @@ ul.bricks > li {
  * CUSTOM CSS
  */
 
-html {
+/*html {
     font-size: 13px;
-}
+}*/
 
 body {
-    font-family: "Lucida Sans", "DejaVu Sans", Arial, sans-serif;
-    line-height: 1.7em;
-    font-size:100%;
-    color: #000000;
+    /*font-family: "Lucida Sans", "DejaVu Sans", Arial, sans-serif;*/
+    /*line-height: 1.7em;*/
+    /*font-size:100%;*/
+    /*color: #000000;*/
+    padding-top: 130px;
 }
 
 
-a {
+/*a {
     line-height: 1em;
-}
+}*/
 
 p {
     text-align: justify;
@@ -93,7 +99,7 @@ ul {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family:  'Cagliostro', sans-serif;
+    font-family: 'Julius Sans One', sans-serif;
     color: #655D5A;
     margin: 0;
     line-height: 1em;
@@ -101,14 +107,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 1.9em;
+  font-size: 1.6em;
   margin-top: 1.5em;
   margin-bottom: 0.8em;
 }
 
 h2 {
-    font-size: 1.6em;
-    margin-top: 1.5em;
+    font-size: 1.4em;
+    margin-top: 2.5em;
     margin-bottom: 0.8em;
 }
 
@@ -124,7 +130,7 @@ tt {
 /** HEADER **/
 
 #blog-title {
-    font-size: 2.5em;
+    font-size: 2em;
     font-weight: bold;
     line-height: 1em;
     padding-top: 10px;
@@ -141,6 +147,40 @@ tt {
     text-decoration: none;
 }
 
+
+/** Top Bar overrides **/
+
+.navbar .brand, .navbar .nav>li>a {
+    font-family: 'Julius Sans One', sans-serif;
+    color: black;
+    font-weight: bold;
+}
+
+.navbar .brand {
+    margin-right: 20px;
+    font-size: 1.6em;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.navbar .nav {
+    font-size: 1.1em;
+}
+
+.navbar .nav>li {
+    line-height: 50px;
+}
+.navbar-inner {
+    background: white;
+    border: none;
+    min-height: 70px;
+}
+
+.navbar .profile {
+    float: left;
+    height: 50px;
+    margin: 10px 10px 10px 0;
+}
 
 /** SIDEBAR **/
 
@@ -195,6 +235,15 @@ article header h1 {
 
 article aside {
     font-size: 0.85em;
+}
+
+article p {
+    line-height: 1.7em;
+    margin-bottom: 20px;
+}
+
+pre {
+    margin-bottom: 20px;
 }
 
 nav.prevNext {

@@ -5,9 +5,10 @@
   <meta charset="utf-8">
   <meta name="description" content="{{description}}" >
   <meta name="author" content="{{blog_author}}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{title}} | {{blog_title}}</title>
   <!-- Le styles -->
-  <link href="http://fonts.googleapis.com/css?family=Cagliostro" rel="stylesheet">
+  <link href="http://fonts.googleapis.com/css?family=Josefin+Sans:400,700,400italic,700italic|Julius+Sans+One" rel="stylesheet" type='text/css'>
 
   {% if use_bundles %}
     {% if use_cdn %}
@@ -46,17 +47,13 @@
   {{extra_head_data}}
 </head>
 <body>
-<div class="container-fluid" id="container">
+<div class="container" id="container">
   <header class="row-fluid" id="titlerow">
     {% include "_header.tmpl" %}
   </header>
 
   <div class="row-fluid" id="contentrow">
-    <nav class="span3" id="sidebar">
-      {% include "_sidebar.tmpl" %}
-    </nav>
-
-    <div class="span9" id="contentcolumn">
+    <div class="span12" id="contentcolumn">
         {% block content %}{% endblock %}
     </div>
   </div>
@@ -87,3 +84,4 @@
     {{analytics}}
     <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"80%",maxHeight:"80%",scalePhotos:true});</script>
 </body>
+</html>
