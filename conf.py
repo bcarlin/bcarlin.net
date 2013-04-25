@@ -58,7 +58,7 @@ SIDEBAR_LINKS = {
     DEFAULT_LANG: (
         # ('/', 'Home'),
         # ('/blog/', 'Blog'),
-        ('/about.html', 'About'),
+        # ('/about.html', 'About'),
         # ('/categories/index.html', 'Tags'),
         # ('/rss.xml', 'RSS'),
     ),

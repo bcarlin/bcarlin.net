@@ -2,10 +2,11 @@
   <div class="navbar-inner">
     <div class="container">
       <img src="/assets/img/profile.png" class="profile" alt="Bruno Carlin" />
-      <a class="brand" href="{{abs_link('/')}}" title="{{blog_title}}">
+      <a class="brand" href="{{abs_link('/')}}" title="{{blog_title}}" rel="home">
         {{blog_title}}
       </a>
       <ul class="nav">
+        <li><a href="/about.html" rel="author">About</a></li>
         {% for url, text in sidebar_links[lang] %}
         <li><a href="{{url}}">{{text}}</a></li>
         {% endfor %}
