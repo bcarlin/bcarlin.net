@@ -96,6 +96,7 @@ ul.bricks > li {
 /*html {
     font-size: 13px;
 }*/
+@media (min-width: 979px) {
 
 body {
     /*font-family: "Lucida Sans", "DejaVu Sans", Arial, sans-serif;*/
@@ -105,10 +106,15 @@ body {
     padding-top: 130px;
 }
 
+.navbar .container {
+    max-width: 800px;
+}
 
-/*a {
-    line-height: 1em;
-}*/
+.container {
+    max-width: 600px;
+}
+
+}
 
 p {
     text-align: justify;
