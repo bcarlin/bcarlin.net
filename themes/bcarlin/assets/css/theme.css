@@ -26,15 +26,6 @@
  * ORIGINAL CSS
  */
 
-.navbar .container {
-    max-width: 800px;
-}
-
-.container {
-    max-width: 600px;
-}
-
-
 #q {
     width: 150px;
 }
@@ -99,10 +90,6 @@ ul.bricks > li {
 @media (min-width: 979px) {
 
 body {
-    /*font-family: "Lucida Sans", "DejaVu Sans", Arial, sans-serif;*/
-    /*line-height: 1.7em;*/
-    /*font-size:100%;*/
-    /*color: #000000;*/
     padding-top: 130px;
 }
 
@@ -122,8 +109,6 @@ p {
 }
 
 ul {
-    /*list-style-type: disc;
-    list-style-position: inside;*/
     margin-bottom: 10px;
 }
 
