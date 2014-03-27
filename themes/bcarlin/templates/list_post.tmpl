@@ -1,19 +1,23 @@
-{% extends "base.tmpl" %}
-{% block content %}
-        <!--Body content-->
-<section>
-    <header>
-        <h1>{{title}}</h1>
-    </header>
-    <ul>
-    {% for post in posts %}
-        <li>
-            <a href="{{post.permalink()}}">{{post.title()}}</a>
-            (<time datetime="{{post.formatted_date("%Y-%m-%d")}}">{{post.formatted_date("%d %b %Y")}}</time>)
-        </li>
-    {% endfor %}
-    </ul>
-
-</section>
+## -*- coding: utf-8 -*-
+<%inherit file="base.tmpl"/>
+<%block name="content">
+        <!--Body content (list_post.tmpl)-->
+          <section>
+          <header>
+            <h1>${title}</h1>
+          </header>
+          %if posts:
+          <ul>
+          % for post in posts:
+            <li>
+              <a href="${post.permalink()}">${post.title()}</a>
+              (<time class="published dt-published" datetime="${post.date.isoformat()}">${post.formatted_date(date_format)}</time>)
+            </li>
+          % endfor
+          </ul>
+          %else:
+          <p>${messages("No posts found.")}</p>
+          %endif
+        </section>
         <!--End of body content-->
-{% endblock %}
+</%block>

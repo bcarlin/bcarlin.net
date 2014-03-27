@@ -1,6 +1,9 @@
-{% extends "list_post.tmpl"%}
-{%block extra_head %}
-        {% for language in translations %}
+## -*- coding: utf-8 -*-
+<%inherit file="list_post.tmpl"/>
+<%block name="extra_head">
+        <!-- Begin tag.tmpl -->
+        % for language in translations:
             <link rel="alternate" type="application/rss+xml" type="application/rss+xml" title="RSS for tag {{tag}} ({{language}})" href="{{_link("tag_rss", tag, language)}}">
-        {% endfor %}
-{% endblock %}
+        % endfor
+        <!-- End tag.tmpl -->
+</%block>

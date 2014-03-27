@@ -1,87 +1,93 @@
+## -*- coding: utf-8 -*-
+<%namespace name="base" file="base_helper.tmpl" import="*" />
+<%namespace name="bootstrap" file="bootstrap_helper.tmpl" import="*" />
+<%namespace name="notes" file="annotation_helper.tmpl" import="*" />
+${set_locale(lang)}
 <!DOCTYPE html>
-{{set_locale(lang)}}
-<html lang="{{lang}}">
+<html
+%if comment_system == 'facebook':
+xmlns:fb="http://ogp.me/ns/fb#"
+%endif
+lang="${lang}">
 <head>
-  <meta charset="utf-8">
-  <meta name="description" content="{{description}}" >
-  <meta name="author" content="{{blog_author}}">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{title}} | {{blog_title}}</title>
-  <!-- Le styles -->
-  <link href="http://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet" type='text/css'>
-  {% if use_bundles %}
-    {% if use_cdn %}
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
-    <link href="/assets/css/all.css" rel="stylesheet" type="text/css">
-    {% else %}
-    <link href="/assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-    {% endif %}
-  {% else %}
-    {% if use_cdn %}
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
-    {% else %}
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="/assets/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
-    {% endif %}
-    <link href="/assets/css/rst.css" rel="stylesheet" type="text/css">
-    <link href="/assets/css/code.css" rel="stylesheet" type="text/css">
-    <link href="/assets/css/colorbox.css" rel="stylesheet" type="text/css"/>
-    <link href="/assets/css/theme.css" rel="stylesheet" type="text/css"/>
-    {% if has_custom_css %}
-    <link href="/assets/css/custom.css" rel="stylesheet" type="text/css">
-    {% endif %}
-  {% endif %}
-  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-  <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-  <![endif]-->
-  {% if rss_link %}
-  {{rss_link}}
-  {% else %}
-  {%  for language in translations %}
-  <link rel="alternate" type="application/rss+xml" title="RSS ({{language}})" href="{{_link("rss", None, lang)}}">
-  {% endfor %}
-  {% endif %}
-  {% block extra_head %}{% endblock %}
-  {{extra_head_data}}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet" type='text/css'>
+    ${bootstrap.html_head()}
+    <%block name="extra_head">
+    </%block>
+    % if annotations and post and not post.meta('noannotations'):
+        ${notes.css()}
+    % elif not annotations and post and post.meta('annotations'):
+        ${notes.css()}
+    % endif
+    ${extra_head_data}
 </head>
 <body>
-  <header id="titlerow">
-    {% include "_header.tmpl" %}
-  </header>
+<!-- Menubar -->
 
-<div class="container" id="container">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <img src="/assets/img/profile.png" class="profile hidden-xs" alt="Bruno Carlin" />
+            <a class="navbar-brand" href="${abs_link('/')}">${blog_title}</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                ${bootstrap.html_navigation_links()}
+            </ul>
+            %if search_form:
+                ${search_form}
+            %endif
 
-  <div class="row-fluid" id="contentrow">
-    <div class="span12" id="contentcolumn">
-        {% block content %}{% endblock %}
+            <ul class="nav navbar-nav navbar-right social-icons">
+                ##<%block name="belowtitle">
+                ##%if len(translations) > 1:
+                ##    <li>${bootstrap.html_translations()}</li>
+                ##%endif
+                ##</%block>
+                ##% if not hide_sourcelink:
+                ##    <%block name="sourcelink"></%block>
+                ##%endif
+                <li><a class="custom-icon" href="https://twitter.com/BrunoCarlin" rel="me">twitter</a></li>
+                <li><a class="custom-icon" href="https://plus.google.com/u/0/111038064246002564897" rel="me">googleplus</a></li>
+                <li><a class="custom-icon" href="https://github.com/bcarlin" rel="me">github</a></li>
+                <li><a class="custom-icon" href="http://www.linkedin.com/in/brunocarlin" rel="me">linkedin</a></li>
+                <li><a class="custom-icon" href="mailto:bruno@bcarlin.net" rel="me">email</a></li>
+                <li><a class="custom-icon" href="/blog/rss.xml" rel="alternate">rss</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container">
+    <!--Body content-->
+    <div class="row">
+        <%block name="content"></%block>
     </div>
-  </div>
+    <!--End of body content-->
 
-  <footer class="row-fluid" id="footerrow">
-    {% include "_footer.tmpl" %}
-  </footer>
+    <footer>
+        ${content_footer}
+    </footer>
 </div>
-    <!-- late load javascript -->
-    {% if use_bundles %}
-        {% if use_cdn %}
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-            <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
-            <script src="/assets/js/all.js" type="text/javascript"></script>
-        {% else %}
-            <script src="/assets/js/all-nocdn.js" type="text/javascript"></script>
-        {% endif %}
-    {% else %}
-        {% if use_cdn %}
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-            <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
-        {% else %}
-            <script src="/assets/js/jquery-1.7.2.min.js" type="text/javascript"></script>
-            <script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
-        {% endif %}
-        <script src="/assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
-    {% endif %}
-    {{analytics}}
-    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"80%",maxHeight:"80%",scalePhotos:true});</script>
+
+${bootstrap.late_load_js()}
+${base.html_social()}
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <%block name="extra_js"></%block>
+    % if annotations and post and not post.meta('noannotations'):
+        ${notes.code()}
+    % elif not annotations and post and post.meta('annotations'):
+        ${notes.code()}
+    % endif
+${body_end}
 </body>
 </html>
