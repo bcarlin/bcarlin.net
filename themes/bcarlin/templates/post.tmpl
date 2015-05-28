@@ -1,19 +1,34 @@
 ## -*- coding: utf-8 -*-
 <%namespace name="helper" file="post_helper.tmpl"/>
+<%namespace name="pheader" file="post_header.tmpl"/>
 <%namespace name="comments" file="comments_helper.tmpl"/>
 <%inherit file="base.tmpl"/>
 <%block name="extra_head">
-${helper.twitter_card_information(post)}
-% if post.meta('keywords'):
-    <meta name="keywords" content="${post.meta('keywords')|h}">
-% endif
-${helper.meta_translations(post)}
+  % if post.meta('keywords'):
+  <meta name="keywords" content="${post.meta('keywords')|h}">
+  % endif
+  %if post.description():
+  <meta name="description" itemprop="description" content="${post.description()}">
+  %endif
+  <meta name="author" content="${post.author()}">
+  %if post.prev_post:
+      <link rel="prev" href="${post.prev_post.permalink()}" title="${post.prev_post.title()|h}" type="text/html">
+  %endif
+  %if post.next_post:
+      <link rel="next" href="${post.next_post.permalink()}" title="${post.next_post.title()|h}" type="text/html">
+  %endif
+  % if post.is_draft:
+      <meta name="robots" content="noindex">
+  % endif
+  ${helper.twitter_card_information(post)}
+  ${helper.open_graph_metadata(post)}
+  ${helper.meta_translations(post)}
 </%block>
 <%block name="content">
   <article class="postbox post-${post.meta('type')} h-entry"
            itemscope="itemscope" itemtype="http://schema.org/Article">
     <header>
-      ${helper.html_title()}
+      ${pheader.html_title()}
       <aside>
           <time class="published dt-published" datetime="${post.date.isoformat()}" itemprop="datePublished">
             ${post.formatted_date(date_format)}

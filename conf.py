@@ -1,3 +1,4 @@
+## -*- coding: utf-8 -*-
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
@@ -5,21 +6,30 @@ import time
 from datetime import datetime as dt
 from nikola import filters
 
-#!! This is the configuration of Nikola. !!#
-#!!  You should edit it to your liking.  !!#
+# !! This is the configuration of Nikola. !! #
+# !!  You should edit it to your liking.  !! #
+
+
+# ! Some settings can be different in different languages.
+# ! A comment stating (translatable) is used to denote those.
+# ! There are two ways to specify a translatable setting:
+# ! (a) BLOG_TITLE = "My Blog"
+# ! (b) BLOG_TITLE = {"en": "My Blog", "es": "Mi Blog"}
+# ! Option (a) is used when you don't want that setting translated.
+# ! Option (b) is used for settings that are different in different languages.
 
 
 # Data about this site
-BLOG_AUTHOR = "Bruno Carlin"
-BLOG_TITLE = "Bruno Carlin"
+BLOG_AUTHOR = "Bruno Carlin"  # (translatable)
+BLOG_TITLE = "Bruno Carlin"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link
 SITE_URL = "http://bcarlin.net/"
-# This is the URL where nikola's output will be deployed.
+# This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
-# BASE_URL = "http://getnikola.com/"
+# BASE_URL = "http://bcarlin.net/"
 BLOG_EMAIL = "bruno@bcarlin.net"
-BLOG_DESCRIPTION = "Some call it home..."
+BLOG_DESCRIPTION = "Some call it home..."  # (translatable)
 
 # Nikola is multilingual!
 #
@@ -71,20 +81,39 @@ TRANSLATIONS = {
 
 # What will translated input files be named like?
 
-# If you have a page something.rst, then something.rst.pl will be considered
+# If you have a page something.rst, then something.pl.rst will be considered
 # its Polish translation.
-#     (in the above example: path == "something", lang == "pl", ext == "rst")
+#     (in the above example: path == "something", ext == "rst", lang == "pl")
 # this pattern is also used for metadata:
-#     something.meta -> something.meta.pl
+#     something.meta -> something.pl.meta
 
-TRANSLATIONS_PATTERN = "{path}.{ext}.{lang}"
+TRANSLATIONS_PATTERN = "{path}.{lang}.{ext}"
 
-# If you don't want your Polish files to be considered Perl code, use this:
-# TRANSLATIONS_PATTERN = "{path}.{lang}.{ext}"
-#     Note that this pattern will become the default in v7.0.0.
+# Links for the sidebar / navigation bar.  (translatable)
+# This is a dict.  The keys are languages, and values are tuples.
+#
+# For regular links:
+#     ('https://getnikola.com/', 'Nikola Homepage')
+#
+# For submenus:
+#     (
+#         (
+#             ('http://apple.com/', 'Apple'),
+#             ('http://orange.com/', 'Orange'),
+#         ),
+#         'Fruits'
+#     )
+#
+# WARNING: Support for submenus is theme-dependent.
+#          Only one level of submenus is supported.
+# WARNING: Some themes, including the default Bootstrap 3 theme,
+#          may present issues if the menu is too large.
+#          (in bootstrap3, the navbar can grow too large and cover contents.)
+# WARNING: If you link to directories, make sure to follow
+#          ``STRIP_INDEXES``.  If it’s set to ``True``, end your links
+#          with a ``/``, otherwise end them with ``/index.html`` — or
+#          else they won’t be highlighted when active.
 
-# Links for the sidebar / navigation bar.
-# You should provide a key-value pair for each used language.
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
         ('/blog/index.html', 'Blog'),
@@ -94,15 +123,51 @@ NAVIGATION_LINKS = {
     ),
 }
 
-# Below this point, everything is optional
+# Name of the theme to use.
+THEME = "bcarlin"
 
-# While nikola can select a sensible locale for each language,
+##############################################
+# Below this point, everything is optional
+##############################################
+
+# Post's dates are considered in UTC by default, if you want to use
+# another time zone, please set TIMEZONE to match. Check the available
+# list from Wikipedia:
+# http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+# (e.g. 'Europe/Zurich')
+# Also, if you want to use a different time zone in some of your posts,
+# you can use the ISO 8601/RFC 3339 format (ex. 2012-03-30T23:00:00+02:00)
+TIMEZONE = 'Europe/Paris'
+
+# If you want to use ISO 8601 (also valid RFC 3339) throughout Nikola
+# (especially in new_post), set this to True.
+# Note that this does not affect DATE_FORMAT.
+# FORCE_ISO8601 = False
+
+# Date format used to display post dates.
+# (str used by datetime.datetime.strftime)
+DATE_FORMAT = '%d %b %Y'
+
+# Date format used to display post dates, if local dates are used.
+# (str used by moment.js)
+# JS_DATE_FORMAT = 'YYYY-MM-DD HH:mm'
+
+# Date fanciness.
+#
+# 0 = using DATE_FORMAT and TIMEZONE
+# 1 = using JS_DATE_FORMAT and local user time (via moment.js)
+# 2 = using a string like “2 days ago”
+#
+# Your theme must support it, bootstrap and bootstrap3 already do.
+# DATE_FANCINESS = 0
+
+# While Nikola can select a sensible locale for each language,
 # sometimes explicit control can come handy.
 # In this file we express locales in the string form that
 # python's locales will accept in your OS, by example
-# "en_US.utf8" in unix-like OS, "English_United States" in Windows.
+# "en_US.utf8" in Unix-like OS, "English_United States" in Windows.
 # LOCALES = dict mapping language --> explicit locale for the languages
-# in TRANSLATIONS. You can ommit one or more keys.
+# in TRANSLATIONS. You can omit one or more keys.
 # LOCALE_FALLBACK = locale to use when an explicit locale is unavailable
 # LOCALE_DEFAULT = locale to use for languages not mentioned in LOCALES; if
 # not set the default Nikola mapping is used.
@@ -113,15 +178,15 @@ NAVIGATION_LINKS = {
 # (whatever/thing.txt).
 #
 # That fragment could have an associated metadata file (whatever/thing.meta),
-# and optionally translated files (example for spanish, with code "es"):
-#     whatever/thing.txt.es and whatever/thing.meta.es
+# and optionally translated files (example for Spanish, with code "es"):
+#     whatever/thing.es.txt and whatever/thing.es.meta
 #
 #     This assumes you use the default TRANSLATIONS_PATTERN.
 #
 # From those files, a set of HTML fragment files will be generated:
 # cache/whatever/thing.html (and maybe cache/whatever/thing.html.es)
 #
-# These files are combinated with the template to produce rendered
+# These files are combined with the template to produce rendered
 # pages, which will be placed at
 # output / TRANSLATIONS[lang] / destination / pagename.html
 #
@@ -140,10 +205,16 @@ PAGES = (
 )
 
 # One or more folders containing files to be copied as-is into the output.
-# The format is a dictionary of "source" "relative destination".
+# The format is a dictionary of {source: relative destination}.
 # Default is:
-# FILES_FOLDERS = {'files': '' }
+# FILES_FOLDERS = {'files': ''}
 # Which means copy 'files' into 'output'
+
+# One or more folders containing listings to be processed and stored into
+# the output. The format is a dictionary of {source: relative destination}.
+# Default is:
+# LISTINGS_FOLDERS = {'listings': 'listings'}
+# Which means process listings from 'listings' into 'output/listings'
 
 # A mapping of languages to file-extensions that represent that language.
 # Feel free to add or delete extensions to any list, but don't add any new
@@ -151,7 +222,7 @@ PAGES = (
 #
 # 'rest' is reStructuredText
 # 'markdown' is MarkDown
-# 'html' assumes the file is html and just copies it
+# 'html' assumes the file is HTML and just copies it
 COMPILERS = {
   "rest": ('.rst', '.txt'),
   "markdown": ('.md', '.mdown', '.markdown'),
@@ -175,11 +246,25 @@ COMPILERS = {
 # Set to False for two-file posts, with separate metadata.
 # ONE_FILE_POSTS = True
 
-# If this is set to True, then posts that are not translated to a language
-# LANG will not be visible at all in the pages in that language.
-# If set to False, the DEFAULT_LANG version will be displayed for
+# If this is set to True, the DEFAULT_LANG version will be displayed for
 # untranslated posts.
-# HIDE_UNTRANSLATED_POSTS = False
+# If this is set to False, then posts that are not translated to a language
+# LANG will not be visible at all in the pages in that language.
+# Formerly known as HIDE_UNTRANSLATED_POSTS (inverse)
+# SHOW_UNTRANSLATED_POSTS = True
+
+# Nikola supports logo display.  If you have one, you can put the URL here.
+# Final output is <img src="LOGO_URL" id="logo" alt="BLOG_TITLE">.
+# The URL may be relative to the site root.
+# LOGO_URL = ''
+
+# If you want to hide the title of your website (for example, if your logo
+# already contains the text), set this to False.
+# SHOW_BLOG_TITLE = True
+
+# Writes tag cloud data in form of tag_cloud_data.json.
+# Warning: this option will change its default value to False in v8!
+WRITE_TAG_CLOUD = True
 
 # Paths for different autogenerated bits. These are combined with the
 # translation paths.
@@ -194,20 +279,79 @@ TAG_PATH = "blog/tag"
 # the posts themselves. If set to False, it will be just a list of links.
 # TAG_PAGES_ARE_INDEXES = True
 
+# Set descriptions for tag pages to make them more interesting. The
+# default is no description. The value is used in the meta description
+# and displayed underneath the tag list or index page’s title.
+# TAG_PAGES_DESCRIPTIONS = {
+#    DEFAULT_LANG: {
+#        "blogging": "Meta-blog posts about blogging about blogging.",
+#        "open source": "My contributions to my many, varied, ever-changing, and eternal libre software projects."
+#    },
+#}
+
+
+# If you do not want to display a tag publicly, you can mark it as hidden.
+# The tag will not be displayed on the tag list page, the tag cloud and posts.
+# Tag pages will still be generated.
+HIDDEN_TAGS = ['mathjax']
+
+# Only include tags on the tag list/overview page if there are at least
+# TAGLIST_MINIMUM_POSTS number of posts or more with every tag. Every tag
+# page is still generated, linked from posts, and included in the sitemap.
+# However, more obscure tags can be hidden from the tag index page.
+# TAGLIST_MINIMUM_POSTS = 1
+
+# Final locations are:
+# output / TRANSLATION[lang] / CATEGORY_PATH / index.html (list of categories)
+# output / TRANSLATION[lang] / CATEGORY_PATH / CATEGORY_PREFIX category.html (list of posts for a category)
+# output / TRANSLATION[lang] / CATEGORY_PATH / CATEGORY_PREFIX category.xml (RSS feed for a category)
+# CATEGORY_PATH = "categories"
+# CATEGORY_PREFIX = "cat_"
+
+# If CATEGORY_PAGES_ARE_INDEXES is set to True, each category's page will contain
+# the posts themselves. If set to False, it will be just a list of links.
+# CATEGORY_PAGES_ARE_INDEXES = False
+
+# Set descriptions for category pages to make them more interesting. The
+# default is no description. The value is used in the meta description
+# and displayed underneath the category list or index page’s title.
+# CATEGORY_PAGES_DESCRIPTIONS = {
+#    DEFAULT_LANG: {
+#        "blogging": "Meta-blog posts about blogging about blogging.",
+#        "open source": "My contributions to my many, varied, ever-changing, and eternal libre software projects."
+#    },
+#}
+
+# If you do not want to display a category publicly, you can mark it as hidden.
+# The category will not be displayed on the category list page.
+# Category pages will still be generated.
+HIDDEN_CATEGORIES = []
+
 # Final location for the main blog page and sibling paginated pages is
 # output / TRANSLATION[lang] / INDEX_PATH / index-*.html
-#INDEX_PATH = ""
+# INDEX_PATH = ""
 
 # Create per-month archives instead of per-year
 # CREATE_MONTHLY_ARCHIVE = False
 # Create one large archive instead of per-year
 CREATE_SINGLE_ARCHIVE = True
+# Create year, month, and day archives each with a (long) list of posts
+# (overrides both CREATE_MONTHLY_ARCHIVE and CREATE_SINGLE_ARCHIVE)
+# CREATE_FULL_ARCHIVES = False
+# If monthly archives or full archives are created, adds also one archive per day
+# CREATE_DAILY_ARCHIVE = False
 # Final locations for the archives are:
 # output / TRANSLATION[lang] / ARCHIVE_PATH / ARCHIVE_FILENAME
 # output / TRANSLATION[lang] / ARCHIVE_PATH / YEAR / index.html
 # output / TRANSLATION[lang] / ARCHIVE_PATH / YEAR / MONTH / index.html
+# output / TRANSLATION[lang] / ARCHIVE_PATH / YEAR / MONTH / DAY / index.html
 ARCHIVE_PATH = "blog"
 ARCHIVE_FILENAME = "index.html"
+
+# If ARCHIVES_ARE_INDEXES is set to True, each archive page which contains a list
+# of posts will contain the posts themselves. If set to False, it will be just a
+# list of links.
+# ARCHIVES_ARE_INDEXES = False
 
 # URLs to other posts/pages can take 3 forms:
 # rel_path: a relative URL to the current page/post (default)
@@ -233,17 +377,33 @@ SLUG_TAG_PATH = True
 # relative URL.
 #
 # If you don't need any of these, just set to []
-# REDIRECTIONS = []
+REDIRECTIONS = []
 
-# Commands to execute to deploy. Can be anything, for example,
-# you may use rsync:
+# Presets of commands to execute to deploy. Can be anything, for
+# example, you may use rsync:
 # "rsync -rav --delete output/ joe@my.site:/srv/www/site"
 # And then do a backup, or run `nikola ping` from the `ping`
-# plugin (`nikola install_plugin ping`).
-# To do manual deployment, set it to []
-DEPLOY_COMMANDS = [
-    "rsync -vazru --progress --delete output/ bcarlin.net:/home/bcarlin/bcarlin.net"
-]
+# plugin (`nikola plugin -i ping`).  Or run `nikola check -l`.
+# You may also want to use github_deploy (see below).
+# You can define multiple presets and specify them as arguments
+# to `nikola deploy`.  If no arguments are specified, a preset
+# named `default` will be executed.  You can use as many presets
+# in a `nikola deploy` command as you like.
+DEPLOY_COMMANDS = {
+    'default': [
+        # "rsync -vazru --progress --delete output/ root@bcarlin.net:/srv/data/bcarlin.net/www",
+        "rsync -vazru --no-o --progress --delete output/ root@37.187.118.208:/srv/data/bcarlin.net/www",
+        "ssh root@37.187.118.208 'chown -R bcarlin.net:bcarlin.net /srv/data/bcarlin.net/www'"
+    ]
+}
+
+# For user.github.io OR organization.github.io pages, the DEPLOY branch
+# MUST be 'master', and 'gh-pages' for other repositories.
+# GITHUB_SOURCE_BRANCH = 'master'
+# GITHUB_DEPLOY_BRANCH = 'gh-pages'
+
+# The name of the remote where you wish to push to, using github_deploy.
+# GITHUB_REMOTE_NAME = 'origin'
 
 # Where the output site should be located
 # If you don't use an absolute path, it will be considered as relative
@@ -271,11 +431,13 @@ DEPLOY_COMMANDS = [
 # A python callable, which will be called with the filename as
 # argument.
 #
-# By default, there are no filters.
+# By default, only .php files uses filters to inject PHP into
+# Nikola’s templates. All other filters must be enabled through FILTERS.
 #
 # Many filters are shipped with Nikola.  A list is available in the manual:
-# <http://getnikola.com/handbook.html#post-processing-filters>
+# <https://getnikola.com/handbook.html#post-processing-filters>
 FILTERS = {
+#    ".html": [filters.typogrify],
     ".jpg": ["jpegoptim --strip-all -m75 -v %s"],
     ".css": [filters.yui_compressor],
      ".js": [filters.yui_compressor],
@@ -285,7 +447,7 @@ FILTERS = {
 # side optimization for very high traffic sites or low memory servers.
 # GZIP_FILES = False
 # File extensions that will be compressed
-# GZIP_EXTENSIONS = ('.txt', '.htm', '.html', '.css', '.js', '.json', '.xml')
+# GZIP_EXTENSIONS = ('.txt', '.htm', '.html', '.css', '.js', '.json', '.atom', '.xml')
 # Use an external gzip command? None means no.
 # Example: GZIP_COMMAND = "pigz -k {filename}"
 # GZIP_COMMAND = None
@@ -312,9 +474,13 @@ SASS_COMPILER = 'sassc'
 # Image Gallery Options
 # #############################################################################
 
-# Galleries are folders in galleries/
-# Final location of galleries will be output / GALLERY_PATH / gallery_name
-# GALLERY_PATH = "galleries"
+# One or more folders containing galleries. The format is a dictionary of
+# {"source": "relative_destination"}, where galleries are looked for in
+# "source/" and the results will be located in
+# "OUTPUT_PATH/relative_destination/gallery_name"
+# Default is:
+# GALLERY_FOLDERS = {"galleries": "galleries"}
+# More gallery options:
 # THUMBNAIL_SIZE = 180
 # MAX_IMAGE_SIZE = 1280
 # USE_FILENAME_AS_TITLE = True
@@ -322,26 +488,94 @@ SASS_COMPILER = 'sassc'
 #
 # If set to False, it will sort by filename instead. Defaults to True
 # GALLERY_SORT_BY_DATE = True
+#
+# Folders containing images to be used in normal posts or pages. Images will be
+# scaled down according to IMAGE_THUMBNAIL_SIZE and MAX_IMAGE_SIZE options, but
+# will have to be referenced manually to be visible on the site
+# (the thumbnail has ``.thumbnail`` added before the file extension).
+# The format is a dictionary of {source: relative destination}.
+
+IMAGE_FOLDERS = {'images': 'images'}
+# IMAGE_THUMBNAIL_SIZE = 400
 
 # #############################################################################
 # HTML fragments and diverse things that are used by the templates
 # #############################################################################
 
 # Data about post-per-page indexes.
-# INDEXES_PAGES defaults to 'old posts, page %d' or 'page %d' (translated),
+# INDEXES_PAGES defaults to ' old posts, page %d' or ' page %d' (translated),
 # depending on the value of INDEXES_PAGES_MAIN.
-INDEXES_TITLE = "Latest Posts"         # If this is empty, defaults to BLOG_TITLE
-#INDEXES_PAGES = "Blih"         # If this is empty, defaults to '[old posts,] page %d' (see above)
-# INDEXES_PAGES_MAIN = False # If True, INDEXES_PAGES is also displayed on
-                             # the main (the newest) index page (index.html)
-
-# Name of the theme to use.
-THEME = "bcarlin"
+#
+# (translatable) If the following is empty, defaults to BLOG_TITLE:
+INDEXES_TITLE = "Latest Posts"
+#
+# (translatable) If the following is empty, defaults to ' [old posts,] page %d' (see above):
+# INDEXES_PAGES = ""
+#
+# If the following is True, INDEXES_PAGES is also displayed on the main (the
+# newest) index page (index.html):
+# INDEXES_PAGES_MAIN = False
+#
+# If the following is True, index-1.html has the oldest posts, index-2.html the
+# second-oldest posts, etc., and index.html has the newest posts. This ensures
+# that all posts on index-x.html will forever stay on that page, now matter how
+# many new posts are added.
+# If False, index-1.html has the second-newest posts, index-2.html the third-newest,
+# and index-n.html the oldest posts. When this is active, old posts can be moved
+# to other index pages when new posts are added.
+# INDEXES_STATIC = True
+#
+# (translatable) If PRETTY_URLS is set to True, this setting will be used to create
+# more pretty URLs for index pages, such as page/2/index.html instead of index-2.html.
+# Valid values for this settings are:
+#   * False,
+#   * a list or tuple, specifying the path to be generated,
+#   * a dictionary mapping languages to lists or tuples.
+# Every list or tuple must consist of strings which are used to combine the path;
+# for example:
+#     ['page', '{number}', '{index_file}']
+# The replacements
+#     {number}     --> (logical) page number;
+#     {old_number} --> the page number inserted into index-n.html before (zero for
+#                      the main page);
+#     {index_file} --> value of option INDEX_FILE
+# are made.
+# Note that in case INDEXES_PAGES_MAIN is set to True, a redirection will be created
+# for the full URL with the page number of the main page to the normal (shorter) main
+# page URL.
+# INDEXES_PRETTY_PAGE_URL = False
 
 # Color scheme to be used for code blocks. If your theme provides
 # "assets/css/code.css" this is ignored.
-# Can be any of autumn borland bw colorful default emacs friendly fruity manni
-# monokai murphy native pastie perldoc rrt tango trac vim vs
+# Can be any of:
+# algol
+# algol_nu
+# arduino
+# autumn
+# borland
+# bw
+# colorful
+# default
+# emacs
+# friendly
+# fruity
+# igor
+# lovelace
+# manni
+# monokai
+# murphy
+# native
+# paraiso_dark
+# paraiso_light
+# pastie
+# perldoc
+# rrt
+# tango
+# trac
+# vim
+# vs
+# xcode
+# This list MAY be incomplete since pygments adds styles every now and then.
 # CODE_COLOR_SCHEME = 'default'
 
 # If you use 'site-reveal' theme you can select several subthemes
@@ -353,33 +587,47 @@ THEME = "bcarlin"
 # THEME_REVEAL_CONFIG_TRANSITION = 'cube'
 # You can also use: page/concave/linear/none/default
 
-# date format used to display post dates.
-# (str used by datetime.datetime.strftime)
-DATE_FORMAT = '%d %b %Y'
-
 # FAVICONS contains (name, file, size) tuples.
-# Used for create favicon link like this:
+# Used to create favicon link like this:
 # <link rel="name" href="file" sizes="size"/>
-# For creating favicons, take a look at:
-# http://www.netmagazine.com/features/create-perfect-favicon
-# FAVICONS = {
+# FAVICONS = (
 #     ("icon", "/favicon.ico", "16x16"),
 #     ("icon", "/icon_128x128.png", "128x128"),
-# }
+# )
 
 # Show only teasers in the index pages? Defaults to False.
 # INDEX_TEASERS = False
 
-# A HTML fragment with the Read more... link.
+# HTML fragments with the Read more... links.
 # The following tags exist and are replaced for you:
-# {link}        A link to the full post page.
-# {read_more}   The string “Read more” in the current language.
-# {{            A literal { (U+007B LEFT CURLY BRACKET)
-# }}            A literal } (U+007D RIGHT CURLY BRACKET)
-# READ_MORE_LINK = '<p class="more"><a href="{link}">{read_more}…</a></p>'
+# {link}                        A link to the full post page.
+# {read_more}                   The string “Read more” in the current language.
+# {reading_time}                An estimate of how long it will take to read the post.
+# {remaining_reading_time}      An estimate of how long it will take to read the post, sans the teaser.
+# {min_remaining_read}          The string “{remaining_reading_time} min remaining to read” in the current language.
+# {paragraph_count}             The amount of paragraphs in the post.
+# {remaining_paragraph_count}   The amount of paragraphs in the post, sans the teaser.
+# {{                            A literal { (U+007B LEFT CURLY BRACKET)
+# }}                            A literal } (U+007D RIGHT CURLY BRACKET)
+
+# 'Read more...' for the index page, if INDEX_TEASERS is True (translatable)
+INDEX_READ_MORE_LINK = '<p class="more"><a href="{link}">{read_more}…</a></p>'
+# 'Read more...' for the RSS_FEED, if RSS_TEASERS is True (translatable)
+RSS_READ_MORE_LINK = '<p class="more"><a href="{link}">{read_more}…</a></p>'
+
+# Append a URL query to the RSS_READ_MORE_LINK in Atom and RSS feeds. Advanced
+# option used for traffic source tracking.
+# Minimum example for use with Piwik: "pk_campaign=feed"
+# The following tags exist and are replaced for you:
+# {feedRelUri}                  A relative link to the feed.
+# {feedFormat}                  The name of the syndication format.
+# Example using replacement for use with Google Analytics:
+# "utm_source={feedRelUri}&utm_medium=nikola_feed&utm_campaign={feedFormat}_feed"
+RSS_LINKS_APPEND_QUERY = False
 
 # A HTML fragment describing the license, for the sidebar.
-LICENSE = ""
+# (translatable)
+# LICENSE = ""
 # I recommend using the Creative Commons' wizard:
 # http://creativecommons.org/choose/
 LICENSE = """<a rel="license" href="http://creativecommons.org/licenses/by/3.0/fr/">
@@ -389,19 +637,40 @@ LICENSE = """<a rel="license" href="http://creativecommons.org/licenses/by/3.0/f
 </a>"""
 
 # A small copyright notice for the page footer (in HTML).
-CONTENT_FOOTER = '''Contents &copy; {year} <a href="mailto:{email}">{author}</a> -
-Generated by <a href="http://getnikola.com" rel="nofollow">Nikola</a> the {date} <br>
-{license}'''
-CONTENT_FOOTER = CONTENT_FOOTER.format(email=BLOG_EMAIL,
-                                       author=BLOG_AUTHOR,
-                                       year=time.gmtime().tm_year,
-                                       date=dt.utcnow().strftime(DATE_FORMAT),
-                                       license=LICENSE)
+# (translatable)
+CONTENT_FOOTER = 'Contents &copy; {date} \
+        <a href="mailto:{email}">{author}</a> - Powered by \
+        <a href="https://getnikola.com" rel="nofollow">Nikola</a> \
+        {license}'
+
+# Things that will be passed to CONTENT_FOOTER.format().  This is done
+# for translatability, as dicts are not formattable.  Nikola will
+# intelligently format the setting properly.
+# The setting takes a dict. The keys are languages. The values are
+# tuples of tuples of positional arguments and dicts of keyword arguments
+# to format().  For example, {'en': (('Hello'), {'target': 'World'})}
+# results in CONTENT_FOOTER['en'].format('Hello', target='World').
+# WARNING: If you do not use multiple languages with CONTENT_FOOTER, this
+#          still needs to be a dict of this format.  (it can be empty if you
+#          do not need formatting)
+# (translatable)
+CONTENT_FOOTER_FORMATS = {
+    DEFAULT_LANG: (
+        (),
+        {
+            "email": BLOG_EMAIL,
+            "author": BLOG_AUTHOR,
+            "date": time.gmtime().tm_year,
+            "license": LICENSE
+        }
+    )
+}
 
 # To use comments, you can choose between different third party comment
-# systems, one of "disqus", "livefyre", "intensedebate", "moot",
-#                 "googleplus", "facebook" or "isso"
-# COMMENT_SYSTEM = "disqus"
+# systems.  The following comment systems are supported by Nikola:
+# "disqus", "livefyre", "intensedebate", "moot", "googleplus", "facebook"
+# or "isso"
+COMMENT_SYSTEM = "disqus"
 # And you also need to add your COMMENT_SYSTEM_ID which
 # depends on what comment system you use. The default is
 # "nikolademo" which is a test account for Disqus. More information
@@ -415,7 +684,10 @@ COMMENT_SYSTEM_ID = "aerdhyl"
 # the "noannotations" metadata.
 # ANNOTATIONS = False
 
-# Create index.html for story folders?
+# Create index.html for page (story) folders?
+# WARNING: if a page would conflict with the index file (usually
+#          caused by setting slug to `index`), the STORY_INDEX
+#          will not be generated for that directory.
 # STORY_INDEX = False
 # Enable comments on story pages?
 # COMMENTS_IN_STORIES = False
@@ -442,6 +714,12 @@ COMMENT_SYSTEM_ID = "aerdhyl"
 # e.g. /2012 includes only /01, /02, /03, /04, ...: don't add it to the sitemap
 # if /2012 includes any files (including index.html)... add it to the sitemap
 # SITEMAP_INCLUDE_FILELESS_DIRS = True
+
+# List of files relative to the server root (!) that will be asked to be excluded
+# from indexing and other robotic spidering. * is supported. Will only be effective
+# if SITE_URL points to server root. The list is used to exclude resources from
+# /robots.txt and /sitemap.xml, and to inform search engines about /sitemapindex.xml.
+# ROBOTS_EXCLUSIONS = ["/archive.html", "/category/*.html"]
 
 # Instead of putting files in <slug>.html, put them in
 # <slug>/index.html. Also enables STRIP_INDEXES
@@ -473,34 +751,44 @@ COMMENT_SYSTEM_ID = "aerdhyl"
 # MATHJAX_CONFIG = ""
 
 # If you are using the compile-ipynb plugin, just add this one:
-#MATHJAX_CONFIG = """
-#<script type="text/x-mathjax-config">
-#MathJax.Hub.Config({
-#    tex2jax: {
-#        inlineMath: [ ['$','$'], ["\\\(","\\\)"] ],
-#        displayMath: [ ['$$','$$'], ["\\\[","\\\]"] ]
-#    },
-#    displayAlign: 'left', // Change this to 'center' to center equations.
-#    "HTML-CSS": {
-#        styles: {'.MathJax_Display': {"margin": 0}}
-#    }
-#});
-#</script>
-#"""
+# MATHJAX_CONFIG = """
+# <script type="text/x-mathjax-config">
+# MathJax.Hub.Config({
+#     tex2jax: {
+#         inlineMath: [ ['$','$'], ["\\\(","\\\)"] ],
+#         displayMath: [ ['$$','$$'], ["\\\[","\\\]"] ],
+#         processEscapes: true
+#     },
+#     displayAlign: 'left', // Change this to 'center' to center equations.
+#     "HTML-CSS": {
+#         styles: {'.MathJax_Display': {"margin": 0}}
+#     }
+# });
+# </script>
+# """
 
 # Do you want to customize the nbconversion of your IPython notebook?
 # IPYNB_CONFIG = {}
-# With the following example configuracion you can use a custom jinja template
+# With the following example configuration you can use a custom jinja template
 # called `toggle.tpl` which has to be located in your site/blog main folder:
 # IPYNB_CONFIG = {'Exporter':{'template_file': 'toggle'}}
 
-# What MarkDown extensions to enable?
+# What Markdown extensions to enable?
 # You will also get gist, nikola and podcast because those are
 # done in the code, hope you don't mind ;-)
+# Note: most Nikola-specific extensions are done via the Nikola plugin system,
+#       with the MarkdownExtension class and should not be added here.
 # MARKDOWN_EXTENSIONS = ['fenced_code', 'codehilite']
 
+# Extra options to pass to the pandoc comand.
+# by default, it's empty, is a list of strings, for example
+# ['-F', 'pandoc-citeproc', '--bibliography=/Users/foo/references.bib']
+# PANDOC_OPTIONS = []
+
 # Social buttons. This is sample code for AddThis (which was the default for a
-# long time). Insert anything you want here, or even make it empty.
+# long time). Insert anything you want here, or even make it empty (which is
+# the default right now)
+# (translatable)
 # SOCIAL_BUTTONS_CODE = """
 # <!-- Social buttons -->
 # <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
@@ -511,105 +799,102 @@ COMMENT_SYSTEM_ID = "aerdhyl"
 # <li><a class="addthis_button_twitter"></a>
 # </ul>
 # </div>
-# <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+# <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 # <!-- End of social buttons -->
 # """
 SOCIAL_BUTTONS_CODE = ""
 
-# Hide link to source for the posts?
-# HIDE_SOURCELINK = False
+# Show link to source for the posts?
+# Formerly known as HIDE_SOURCELINK (inverse)
+# SHOW_SOURCELINK = True
 # Copy the source files for your pages?
-# Setting it to False implies HIDE_SOURCELINK = True
+# Setting it to False implies SHOW_SOURCELINK = False
 # COPY_SOURCES = True
 
 # Modify the number of Post per Index Page
 # Defaults to 10
 INDEX_DISPLAY_POST_COUNT = 100000
 
+# By default, Nikola generates RSS files for the website and for tags, and
+# links to it.  Set this to False to disable everything RSS-related.
+# GENERATE_RSS = True
+
+# By default, Nikola does not generates Atom files for indexes and links to
+# them. Generate Atom for tags by setting TAG_PAGES_ARE_INDEXES to True.
+# Atom feeds are built based on INDEX_DISPLAY_POST_COUNT and not FEED_LENGTH
+# Switch between plain-text summaries and full HTML content using the
+# RSS_TEASER option. RSS_LINKS_APPEND_QUERY is also respected. Atom feeds
+# are generated even for old indexes and have pagination link relations
+# between each other. Old Atom feeds with no changes are marked as archived.
+# GENERATE_ATOM = False
+
 # RSS_LINK is a HTML fragment to link the RSS or Atom feeds. If set to None,
 # the base.tmpl will use the feed Nikola generates. However, you may want to
-# change it for a feedburner feed or something else.
+# change it for a FeedBurner feed or something else.
 # RSS_LINK = None
 
-# Show only teasers in the RSS feed? Default to True
+# Show only teasers in the RSS and Atom feeds? Default to True
 # RSS_TEASERS = True
 
-# A search form to search this site, for the sidebar. You can use a google
+# Strip HTML in the RSS feed? Default to False
+# RSS_PLAIN = False
+
+# A search form to search this site, for the sidebar. You can use a Google
 # custom search (http://www.google.com/cse/)
-# Or a duckduckgo search: https://duckduckgo.com/search_box.html
+# Or a DuckDuckGo search: https://duckduckgo.com/search_box.html
 # Default is no search form.
+# (translatable)
 # SEARCH_FORM = ""
 #
 # This search form works for any site and looks good in the "site" theme where
 # it appears on the navigation bar:
 #
-#SEARCH_FORM = """
-#<!-- Custom search -->
-#<form method="get" id="search" action="http://duckduckgo.com/"
-# class="navbar-form pull-left">
-#<input type="hidden" name="sites" value="%s"/>
-#<input type="hidden" name="k8" value="#444444"/>
-#<input type="hidden" name="k9" value="#D51920"/>
-#<input type="hidden" name="kt" value="h"/>
-#<input type="text" name="q" maxlength="255"
-# placeholder="Search&hellip;" class="span2" style="margin-top: 4px;"/>
-#<input type="submit" value="DuckDuckGo Search" style="visibility: hidden;" />
-#</form>
-#<!-- End of custom search -->
-#""" % SITE_URL
-#
-# If you prefer a google search form, here's an example that should just work:
-#SEARCH_FORM = """
-#<!-- Custom search with google-->
-#<form id="search" action="http://google.com/search" method="get" class="navbar-form pull-left">
-#<input type="hidden" name="q" value="site:%s" />
-#<input type="text" name="q" maxlength="255" results="0" placeholder="Search"/>
-#</form>
-#<!-- End of custom search -->
-#""" % SITE_URL
-
-# Also, there is a local search plugin you can use, based on Tipue, but it requires setting several
-# options:
-
 # SEARCH_FORM = """
-# <span class="navbar-form pull-left">
-# <input type="text" id="tipue_search_input">
-# </span>"""
+# <!-- Custom search -->
+# <form method="get" id="search" action="//duckduckgo.com/"
+#  class="navbar-form pull-left">
+# <input type="hidden" name="sites" value="%s"/>
+# <input type="hidden" name="k8" value="#444444"/>
+# <input type="hidden" name="k9" value="#D51920"/>
+# <input type="hidden" name="kt" value="h"/>
+# <input type="text" name="q" maxlength="255"
+#  placeholder="Search&hellip;" class="span2" style="margin-top: 4px;"/>
+# <input type="submit" value="DuckDuckGo Search" style="visibility: hidden;" />
+# </form>
+# <!-- End of custom search -->
+# """ % SITE_URL
 #
-# BODY_END = """
-# <script type="text/javascript" src="/assets/js/tipuesearch_set.js"></script>
-# <script type="text/javascript" src="/assets/js/tipuesearch.js"></script>
-# <script type="text/javascript">
-# $(document).ready(function() {
-    # $('#tipue_search_input').tipuesearch({
-        # 'mode': 'json',
-        # 'contentLocation': '/assets/js/tipuesearch_content.json',
-        # 'showUrl': false
-    # });
-# });
-# </script>
-# """
+# If you prefer a Google search form, here's an example that should just work:
+# SEARCH_FORM = """
+# <!-- Custom search with Google-->
+# <form id="search" action="//www.google.com/search" method="get" class="navbar-form pull-left">
+# <input type="hidden" name="q" value="site:%s" />
+# <input type="text" name="q" maxlength="255" results="0" placeholder="Search"/>
+# </form>
+# <!-- End of custom search -->
+#""" % SITE_URL
 
-# EXTRA_HEAD_DATA = """
-# <link rel="stylesheet" type="text/css" href="/assets/css/tipuesearch.css">
-# <div id="tipue_search_content" style="margin-left: auto; margin-right: auto; padding: 20px;"></div>
-# """
-# ENABLED_EXTRAS = ['local_search']
-#
-
-
-# Use content distribution networks for jquery and twitter-bootstrap css and js
-# If this is True, jquery is served from the Google  and twitter-bootstrap
-# is served from the NetDNA CDN
+# Use content distribution networks for jQuery, twitter-bootstrap css and js,
+# and html5shiv (for older versions of Internet Explorer)
+# If this is True, jQuery and html5shiv are served from the Google CDN and
+# Bootstrap is served from BootstrapCDN (provided by MaxCDN)
 # Set this to False if you want to host your site without requiring access to
 # external resources.
 # USE_CDN = False
 
+# Check for USE_CDN compatibility.
+# If you are using custom themes, have configured the CSS properly and are
+# receiving warnings about incompatibility but believe they are incorrect, you
+# can set this to False.
+# USE_CDN_WARNING = True
+
 # Extra things you want in the pages HEAD tag. This will be added right
 # before </head>
-# EXTRA_HEAD_DATA = ""
+# (translatable)
+EXTRA_HEAD_DATA = """<link href="http://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet" type='text/css'>"""
 # Google Analytics or whatever else you use. Added to the bottom of <body>
 # in the default template (base.tmpl).
+# (translatable)
 BODY_END = """<script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-27133411-1']);
@@ -637,41 +922,36 @@ BODY_END = """<script type="text/javascript">
 # '(?P<date>\d{4}-\d{2}-\d{2})-(?P<slug>.*)-(?P<title>.*)\.md'
 # FILE_METADATA_REGEXP = None
 
+# If you hate "Filenames with Capital Letters and Spaces.md", you should
+# set this to true.
+UNSLUGIFY_TITLES = True
+
 # Additional metadata that is added to a post when creating a new_post
 # ADDITIONAL_METADATA = {}
 
-# Nikola supports Twitter Card summaries / Open Graph.
-# Twitter cards make it possible for you to attach media to Tweets
-# that link to your content.
+# Nikola supports Open Graph Protocol data for enhancing link sharing and
+# discoverability of your site on Facebook, Google+, and other services.
+# Open Graph is enabled by default.
+# USE_OPEN_GRAPH = True
+
+# Nikola supports Twitter Card summaries, but they are disabled by default.
+# They make it possible for you to attach media to Tweets that link
+# to your content.
 #
 # IMPORTANT:
 # Please note, that you need to opt-in for using Twitter Cards!
-# To do this please visit
-# https://dev.twitter.com/form/participate-twitter-cards
+# To do this please visit https://cards-dev.twitter.com/validator
 #
 # Uncomment and modify to following lines to match your accounts.
-# Specifying the id for either 'site' or 'creator' will be preferred
-# over the cleartext username. Specifying an ID is not necessary.
-# Displaying images is currently not supported.
+# Images displayed come from the `previewimage` meta tag.
+# You can specify the card type by using the `card` parameter in TWITTER_CARD.
 # TWITTER_CARD = {
-#     # 'use_twitter_cards': True,  # enable Twitter Cards / Open Graph
-#     # 'site': '@website',  # twitter nick for the website
-#     # 'site:id': 123456,  # Same as site, but the website's Twitter user ID
-#                           # instead.
-#     # 'creator': '@username',  # Username for the content creator / author.
-#     # 'creator:id': 654321,  # Same as creator, but the Twitter user's ID.
+#     # 'use_twitter_cards': True,  # enable Twitter Cards
+#     # 'card': 'summary',          # Card type, you can also use 'summary_large_image',
+#                                   # see https://dev.twitter.com/cards/types
+#     # 'site': '@website',         # twitter nick for the website
+#     # 'creator': '@username',     # Username for the content creator / author.
 # }
-
-
-# Post's dates are considered in UTC by default, if you want to use
-# another time zone, please set TIMEZONE to match. Check the available
-# list from Wikipedia:
-# http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-# (eg. 'Europe/Zurich')
-# Also, if you want to use a different time zone in some of your posts,
-# you can use W3C-DTF Format (ex. 2012-03-30T23:00:00+02:00)
-#
-TIMEZONE = 'Europe/Paris'
 
 # If webassets is installed, bundle JS and CSS to make site loading faster
 USE_BUNDLES = True
@@ -683,16 +963,6 @@ USE_BUNDLES = True
 # For example, the `plugins` directory of your clone of the Nikola plugins
 # repository.
 # EXTRA_PLUGINS_DIRS = []
-
-# Experimental plugins - use at your own risk.
-# They probably need some manual adjustments - please see their respective
-# readme.
-# ENABLED_EXTRAS = [
-#     'planetoid',
-#     'ipynb',
-#     'local_search',
-#     'render_mustache',
-# ]
 
 # List of regular expressions, links matching them will always be considered
 # valid by "nikola check -l"
@@ -709,19 +979,30 @@ USE_BUNDLES = True
 # (defaults to 1.)
 # DEMOTE_HEADERS = 1
 
+# If you don’t like slugified file names ([a-z0-9] and a literal dash),
+# and would prefer to use all the characters your file system allows.
+# USE WITH CARE!  This is also not guaranteed to be perfect, and may
+# sometimes crash Nikola, your web server, or eat your cat.
+# USE_SLUGIFY = True
+
 # You can configure the logging handlers installed as plugins or change the
-# log level of the default stdout handler.
+# log level of the default stderr handler.
+# WARNING: The stderr handler allows only the loglevels of 'INFO' and 'DEBUG'.
+#          This is done for safety reasons, as blocking out anything other
+#          than 'DEBUG' may hide important information and break the user
+#          experience!
+
 LOGGING_HANDLERS = {
-    'stderr': {'loglevel': 'WARNING', 'bubble': True},
-    #'smtp': {
-    #    'from_addr': 'test-errors@example.com',
-    #    'recipients': ('test@example.com'),
-    #    'credentials':('testusername', 'password'),
-    #    'server_addr': ('127.0.0.1', 25),
-    #    'secure': (),
-    #    'level': 'DEBUG',
-    #    'bubble': True
-    #}
+    'stderr': {'loglevel': 'INFO', 'bubble': True},
+    # 'smtp': {
+    #     'from_addr': 'test-errors@example.com',
+    #     'recipients': ('test@example.com'),
+    #     'credentials':('testusername', 'password'),
+    #     'server_addr': ('127.0.0.1', 25),
+    #     'secure': (),
+    #     'level': 'DEBUG',
+    #     'bubble': True
+    # }
 }
 
 # Templates will use those filters, along with the defaults.
@@ -734,3 +1015,8 @@ LOGGING_HANDLERS = {
 GLOBAL_CONTEXT = {
   'update_date': dt.now(),
 }
+
+# Add functions here and they will be called with template
+# GLOBAL_CONTEXT as parameter when the template is about to be
+# rendered
+GLOBAL_CONTEXT_FILLER = []
