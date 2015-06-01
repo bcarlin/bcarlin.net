@@ -24,7 +24,7 @@ BLOG_AUTHOR = "Bruno Carlin"  # (translatable)
 BLOG_TITLE = "Bruno Carlin"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link
-SITE_URL = "http://bcarlin.net/"
+SITE_URL = "https://bcarlin.net/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "http://bcarlin.net/"
@@ -207,7 +207,7 @@ PAGES = (
 # One or more folders containing files to be copied as-is into the output.
 # The format is a dictionary of {source: relative destination}.
 # Default is:
-# FILES_FOLDERS = {'files': ''}
+FILES_FOLDERS = {'files': ''}
 # Which means copy 'files' into 'output'
 
 # One or more folders containing listings to be processed and stored into
@@ -891,7 +891,7 @@ INDEX_DISPLAY_POST_COUNT = 100000
 # Extra things you want in the pages HEAD tag. This will be added right
 # before </head>
 # (translatable)
-EXTRA_HEAD_DATA = """<link href="http://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet" type='text/css'>"""
+EXTRA_HEAD_DATA = """<link href="//fonts.googleapis.com/css?family=Quicksand&subset=latin" rel="stylesheet" type='text/css'>"""
 # Google Analytics or whatever else you use. Added to the bottom of <body>
 # in the default template (base.tmpl).
 # (translatable)
