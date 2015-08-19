@@ -1,2 +1,4 @@
-Nikola==7.4.1
+Nikola==7.6.3
 livereload
+ws4py
+watchdog
