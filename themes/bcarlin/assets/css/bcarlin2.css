@@ -10,20 +10,20 @@ Large devices (large desktops, 1200px and up)
 */
 @font-face {
   font-family: 'bcarlin';
-  src: url('../fonts/bcarlin.eot');
-  src: url('../fonts/bcarlin.eot?#iefix') format('embedded-opentype'), url('../fonts/bcarlin.woff') format('woff'), url('../fonts/bcarlin.ttf') format('truetype'), url('../fonts/bcarlin.svg#bcarlin') format('svg');
+  src: url("../fonts/bcarlin.eot");
+  src: url("../fonts/bcarlin.eot?#iefix") format("embedded-opentype"), url("../fonts/bcarlin.woff") format("woff"), url("../fonts/bcarlin.ttf") format("truetype"), url("../fonts/bcarlin.svg#bcarlin") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 .custom-icon {
   font-family: 'bcarlin' !important;
   font-weight: normal !important;
-  -webkit-font-feature-settings: "liga", "dlig";
+  -webkit-font-feature-settings: "liga","dlig";
   -moz-font-feature-settings: "liga=1, dlig=1";
-  -moz-font-feature-settings: "liga", "dlig";
-  -ms-font-feature-settings: "liga", "dlig";
-  -o-font-feature-settings: "liga", "dlig";
-  font-feature-settings: "liga", "dlig";
+  -moz-font-feature-settings: "liga","dlig";
+  -ms-font-feature-settings: "liga","dlig";
+  -o-font-feature-settings: "liga","dlig";
+  font-feature-settings: "liga","dlig";
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased; }
 
@@ -61,7 +61,7 @@ tt {
   border-radius: 5px;
   border: lightgray 1px solid;
   font-family: monospace, courrier new;
-  font-size: 0.9em;
+  font-size: .9em;
   padding: 1px 5px;
   white-space: nowrap; }
 
@@ -80,35 +80,38 @@ time {
 .sep {
   margin: 0 10px; }
 
+dd {
+  margin-left: 33px; }
+  dd + dt {
+    margin-top: 15px; }
+
 /** Top Bar overrides **/
 .navbar .navbar-brand, .navbar .nav > li > a {
   font-family: 'Quicksand', sans-serif;
   color: black;
   font-weight: bold; }
+
 .navbar .navbar-brand {
   margin-right: 20px;
   font-size: 1.6em; }
   .navbar .navbar-brand #blog-title {
     padding: 0; }
+
 .navbar .nav {
   font-size: 1.1em; }
 
 @media (max-width: 768px) {
   body {
     margin-top: 70px; }
-
   .row {
     padding-left: 15px;
     padding-right: 15px; }
-
   .navbar .social-icons li, .navbar .social-icons a {
-    display: inline; }
- }
+    display: inline; } }
 
 @media (min-width: 768px) {
   body {
     margin-top: 140px; }
-
   .navbar .navbar-brand, .navbar .nav > li > a {
     padding-top: 25px;
     padding-bottom: 25px; }
@@ -119,8 +122,7 @@ time {
   .navbar .profile {
     float: left;
     height: 50px;
-    margin: 10px 10px 10px 0; }
- }
+    margin: 10px 10px 10px 0; } }
 
 /** Post **/
 article header {
@@ -130,9 +132,11 @@ article header {
     border-bottom: gray 1px solid;
     padding-bottom: 10px;
     margin-bottom: 0; }
+
 article aside {
   font-size: 0.85em;
   margin-top: 5px; }
+
 article p {
   line-height: 1.7em;
   margin-bottom: 20px; }

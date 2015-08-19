@@ -97,6 +97,14 @@ time {
     margin: 0 10px;
 }
 
+dd {
+    margin-left: 33px;
+
+    & + dt {
+        margin-top:  15px;
+    }
+}
+
 /** Top Bar overrides **/
 
 .navbar {
