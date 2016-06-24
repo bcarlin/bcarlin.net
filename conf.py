@@ -613,7 +613,7 @@ INDEXES_TITLE = "Latest Posts"
 # 'Read more...' for the index page, if INDEX_TEASERS is True (translatable)
 INDEX_READ_MORE_LINK = '<p class="more"><a href="{link}">{read_more}…</a></p>'
 # 'Read more...' for the RSS_FEED, if RSS_TEASERS is True (translatable)
-RSS_READ_MORE_LINK = '<p class="more"><a href="{link}">{read_more}…</a></p>'
+FEED_READ_MORE_LINK = '<p class="more"><a href="{link}">{read_more}…</a></p>'
 
 # Append a URL query to the RSS_READ_MORE_LINK in Atom and RSS feeds. Advanced
 # option used for traffic source tracking.
@@ -623,14 +623,14 @@ RSS_READ_MORE_LINK = '<p class="more"><a href="{link}">{read_more}…</a></p>'
 # {feedFormat}                  The name of the syndication format.
 # Example using replacement for use with Google Analytics:
 # "utm_source={feedRelUri}&utm_medium=nikola_feed&utm_campaign={feedFormat}_feed"
-RSS_LINKS_APPEND_QUERY = False
+FEED_LINKS_APPEND_QUERY = False
 
 # A HTML fragment describing the license, for the sidebar.
 # (translatable)
 # LICENSE = ""
 # I recommend using the Creative Commons' wizard:
 # http://creativecommons.org/choose/
-LICENSE = """<a rel="license" href="http://creativecommons.org/licenses/by/3.0/fr/">
+LICENSE = """<a rel="license" href="https://creativecommons.org/licenses/by/3.0/fr/">
   Creative Commons Attribution 3.0 License
   <span class="custom-icon">CC</span>
   <span class="custom-icon">BY</span>
@@ -638,10 +638,10 @@ LICENSE = """<a rel="license" href="http://creativecommons.org/licenses/by/3.0/f
 
 # A small copyright notice for the page footer (in HTML).
 # (translatable)
-CONTENT_FOOTER = 'Contents &copy; {date} \
-        <a href="mailto:{email}">{author}</a> - Powered by \
-        <a href="https://getnikola.com" rel="nofollow">Nikola</a><br> \
-        {license}'
+CONTENT_FOOTER = '''Contents &copy; {date}
+        <a href="mailto:{email}">{author}</a> - Powered by
+        <a href="https://getnikola.com" rel="nofollow">Nikola</a><br>
+        {license}'''
 
 # Things that will be passed to CONTENT_FOOTER.format().  This is done
 # for translatability, as dicts are not formattable.  Nikola will
