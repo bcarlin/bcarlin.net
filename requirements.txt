@@ -2,3 +2,4 @@ Nikola==7.6.3
 livereload
 ws4py
 watchdog
+webassets
