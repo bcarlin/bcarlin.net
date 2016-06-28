@@ -391,7 +391,6 @@ REDIRECTIONS = []
 # in a `nikola deploy` command as you like.
 DEPLOY_COMMANDS = {
     'default': [
-        # "rsync -vazru --progress --delete output/ root@bcarlin.net:/srv/data/bcarlin.net/www",
         "rsync -vazru --no-o --progress --delete output/ root@37.187.118.208:/srv/data/bcarlin.net/www",
         "ssh root@37.187.118.208 'chown -R bcarlin.net:bcarlin.net /srv/data/bcarlin.net/www'"
     ]
